@@ -1,7 +1,9 @@
 class UserController {
     // [GET] /user
     index(req, res) {
-        res.render('pages/users/index');
+        res.render('pages/users/index', {
+            title: 'User Page',
+        });
     }
 
     // [GET] /user/create
