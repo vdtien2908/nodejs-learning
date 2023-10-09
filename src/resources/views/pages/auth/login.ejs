@@ -1,9 +1,6 @@
 <div class="container" style="height: 100vh">
     <!-- Outer Row -->
-    <div
-        class="row justify-content-center align-items-center"
-        style="height: 100%"
-    >
+    <div class="row justify-content-center align-items-center" style="height: 100%">
         <div class="col-xl-8 col-lg-12 col-md-9">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
@@ -14,71 +11,37 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-2">
                                         Admin
-                                        <sup
-                                            ><i class="far fa-check-circle"></i
-                                        ></sup>
+                                        <sup><i class="far fa-check-circle"></i></sup>
                                     </h1>
                                     <h1 class="h6 text-gray-500 mb-4">
                                         Chào mừng bạn quay lại!
                                     </h1>
                                 </div>
 
-                                <form
-                                    id="login-form"
-                                    method="POST"
-                                    class="user needs-validation"
-                                    novalidate
-                                    action="{{ route('login') }}"
-                                >
+                                <form id="login-form" method="POST" class="user needs-validation" novalidate
+                                    action="/login">
                                     <div class="form-group">
-                                        <input
-                                            name="email"
-                                            type="email"
-                                            class="form-control form-control-user"
-                                            id="exampleInputEmail"
-                                            aria-describedby="emailHelp"
-                                            placeholder="Tài khoản"
-                                            required
-                                        />
+                                        <input name="email" type="email" class="form-control form-control-user"
+                                            id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Tài khoản"
+                                            required />
                                         <div class="ml-2 invalid-feedback">
                                             Vui lòng nhập email!
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input
-                                            name="password"
-                                            type="password"
-                                            class="form-control form-control-user"
-                                            id="exampleInputPassword"
-                                            placeholder="Mật khẩu"
-                                            required
-                                        />
+                                        <input name="password" type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Mật khẩu" required />
                                         <div class="ml-2 invalid-feedback">
                                             Vui lòng nhập mật khẩu!
                                         </div>
                                     </div>
                                     <div class="ml-3">
-                                        <div
-                                            class="form-check form-check-inline"
-                                        >
-                                            <input
-                                                class="form-check-input"
-                                                type="radio"
-                                                name="role"
-                                                {{
-                                                $errors-
-                                            />
-                                            <label
-                                                class="form-check-label"
-                                                for="inlineRadio1"
-                                                >Lưu mật khẩu</label
-                                            >
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="role" {{ $errors- />
+                                            <label class="form-check-label" for="inlineRadio1">Lưu mật khẩu</label>
                                         </div>
                                     </div>
-                                    <button
-                                        type="submit"
-                                        class="mt-3 btn btn-primary btn-user btn-block"
-                                    >
+                                    <button type="submit" class="mt-3 btn btn-primary btn-user btn-block">
                                         Đăng nhập
                                     </button>
                                 </form>

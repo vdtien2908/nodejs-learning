@@ -1,3 +1,5 @@
+import UserModel from '../models/UserModel';
+
 class UserController {
     // [GET] /user
     index(req, res) {

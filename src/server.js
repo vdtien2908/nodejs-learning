@@ -2,11 +2,16 @@ import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
 import expressLayouts from 'express-ejs-layouts';
+import session from 'express-session';
 
 dotenv.config();
 const port = process.env.PORT || 8888;
 
 import route from './routes';
+import * as db from './config/db';
+
+// Connect to DB
+db.connect();
 
 // App
 const app = express();
@@ -23,6 +28,15 @@ app.set('view engine', 'ejs');
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Setup session
+app.use(
+    session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
 // Init route
 route(app);

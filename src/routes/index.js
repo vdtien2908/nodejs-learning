@@ -8,6 +8,7 @@ function route(app) {
     app.use('/', homeRoute);
     // Login
     app.get('/login', AuthController.index);
+    app.post('/login', AuthController.login);
     app.use('/about', aboutRoute);
     app.use('/user', userRoute);
 }

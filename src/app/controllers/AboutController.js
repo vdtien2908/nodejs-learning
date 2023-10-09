@@ -1,6 +1,6 @@
 class AboutController {
     // [GET] /about
-    index(req, res) {
+    async index(req, res) {
         res.render('pages/about');
     }
 }
