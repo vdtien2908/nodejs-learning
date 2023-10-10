@@ -8,10 +8,6 @@ dotenv.config();
 const port = process.env.PORT || 8888;
 
 import route from './routes';
-import * as db from './config/db';
-
-// Connect to DB
-db.connect();
 
 // App
 const app = express();
@@ -37,6 +33,13 @@ app.use(
         saveUninitialized: false,
     })
 );
+
+// middleware to make 'user' available to all templates
+app.use(function (req, res, next) {
+    res.locals.sessionUser = req.session.user;
+    console.log(res.locals.sessionUser);
+    next();
+});
 
 // Init route
 route(app);

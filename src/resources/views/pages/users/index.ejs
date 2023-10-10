@@ -1,9 +1,7 @@
 <!-- Page Heading -->
 <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>  -->
 <div class="card shadow mb-4">
-    <div
-        class="card-header py-3 d-flex justify-content-between align-items-center"
-    >
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">Giáo vụ</h6>
         <a href="/user/create" class="btn btn-info btn-icon-split">
             <span class="icon text-white-50">
@@ -14,12 +12,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table
-                class="table table-bordered"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-            >
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
@@ -34,7 +27,7 @@
                             Điện thoại
                         </th>
                         <th class="text-center white-space-no-wrap">
-                            Ngày sinh
+                            Quyền
                         </th>
                         <th class="text-center white-space-no-wrap">
                             Hành động
@@ -44,38 +37,41 @@
 
                 <tfoot></tfoot>
                 <tbody>
-                    <tr>
-                        <td class="text-center align-middle">1</td>
-                        <td class="align-middle">NguyenVanA</td>
-                        <td class="align-middle">Nam</td>
-                        <td class="align-middle">NguyenVawA@gmail.com</td>
-                        <td class="align-middle">123456789</td>
-                        <td class="align-middle">12/2/2022</td>
-                        <td class="text-center white-space-no-wrap">
-                            <a href="" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form
-                                method="POST"
-                                style="display: none"
-                                id="form-submit-delete"
-                                action=""
-                            >
-                                <button type="submit" id="submit-delete-form">
-                                    submit
+                    <% users.forEach(function(user, index){ %>
+                        <tr>
+                            <td class="text-center align-middle">
+                                <%= index+1 %>
+                            </td>
+                            <td class="align-middle white-space-no-wrap">
+                                <%= user.full_name %>
+                            </td>
+                            <td class="align-middle">
+                                <%= user.sex===1 ? 'Nam' : 'Nữ' %>
+                            </td>
+                            <td class="align-middle">
+                                <%= user.email %>
+                            </td>
+                            <td class="align-middle">
+                                <%= user.phone %>
+                            </td>
+                            <td class="align-middle white-space-no-wrap">
+                                <%= user.role===1 ? 'Người dùng' : 'Admin' %>
+                            </td>
+                            <td class="text-center white-space-no-wrap">
+                                <a href="/user/<%= user.id %>/edit" class="btn btn-warning btn-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" style="display: none" id="form-submit-delete-<%=user.id%>"
+                                    action="/user/<%=user.id%>/delete">
+                                    <button type="submit" id="submit-delete-form">submit</button>
+                                </form>
+                                <button data-id="<%= user.id %>" type="button" class="btn btn-danger btn-circle delete"
+                                    data-target="#deleteModal" data-toggle="modal">
+                                    <i class="fas fa-trash"></i>
                                 </button>
-                            </form>
-                            <button
-                                data-id=""
-                                type="button"
-                                class="btn btn-danger btn-circle delete"
-                                data-target="#deleteModal"
-                                data-toggle="modal"
-                            >
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <% }) %>
                 </tbody>
             </table>
         </div>

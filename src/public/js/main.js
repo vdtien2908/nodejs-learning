@@ -61,4 +61,13 @@
             );
         e.preventDefault();
     });
+
+    let id = 0;
+    $(document).on('click', '.delete', function () {
+        id = $(this).attr('data-id');
+    });
+
+    $(document).on('click', '#click-delete-form', function () {
+        document.getElementById(`form-submit-delete-${id}`).submit();
+    });
 })(jQuery); // End of use strict

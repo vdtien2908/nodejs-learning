@@ -1,12 +1,16 @@
 import * as db from '../../config/db';
 
 class BaseModel {
-    async getAll(tableName, select = ['*'], orderBy = []) {
+    constructor() {
+        this.tableName = '';
+    }
+
+    async getAll(select = ['*'], orderBy = []) {
         const pool = await db.connect();
         // Handle option query
         const columns = select.join(',');
         const orderByString = orderBy.join('');
-        let sql = `SELECT ${columns} FROM ${tableName} WHERE status = 1`;
+        let sql = `SELECT ${columns} FROM ${this.tableName} WHERE status = 1`;
         if (orderBy.length > 0) {
             sql += ` ORDER BY ${orderByString}`;
         }
@@ -20,9 +24,9 @@ class BaseModel {
         }
     }
 
-    async findById(tableName, id) {
+    async findById(id) {
         const pool = await db.connect();
-        const sql = `SELECT * FROM ${tableName} WHERE id = ? AND status = 1`;
+        const sql = `SELECT * FROM ${this.tableName} WHERE id = ? AND status = 1`;
         try {
             const [rows] = await pool.execute(sql, [id]);
             return Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
@@ -32,9 +36,9 @@ class BaseModel {
         }
     }
 
-    async findOne(tableName, fieldName, value) {
+    async findOne(fieldName, value) {
         const pool = await db.connect();
-        const sql = `SELECT * FROM ${tableName} WHERE ${fieldName} = ? AND status = 1 LIMIT 1`;
+        const sql = `SELECT * FROM ${this.tableName} WHERE ${fieldName} = ? AND status = 1 LIMIT 1`;
         try {
             const [rows] = await pool.execute(sql, [value]);
             return Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
@@ -44,14 +48,14 @@ class BaseModel {
         }
     }
 
-    async create(tableName, data) {
+    async create(data) {
         const pool = await db.connect();
         const columns = Object.keys(data).join(',');
         const placeholders = Object.values(data)
             .map(() => '?')
             .join(',');
         const values = Object.values(data);
-        const sql = `INSERT INTO ${tableName} (${columns}) VALUES (${placeholders})`;
+        const sql = `INSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
         try {
             const [result] = await pool.execute(sql, values);
             return result.insertId;
@@ -61,9 +65,9 @@ class BaseModel {
         }
     }
 
-    async update(tableName, id, data) {
+    async update(id, data) {
         const pool = await db.connect();
-        let sql = `UPDATE ${tableName} SET `;
+        let sql = `UPDATE ${this.tableName} SET `;
         let placeholders = [];
         let updates = [];
         for (const [key, value] of Object.entries(data)) {
@@ -80,9 +84,9 @@ class BaseModel {
         }
     }
 
-    async delete(tableName, id) {
+    async delete(id) {
         const pool = await db.connect();
-        const sql = `UPDATE ${tableName} SET status = 0 WHERE id = ${id}`;
+        const sql = `UPDATE ${this.tableName} SET status = 0 WHERE id = ${id}`;
         try {
             const [result] = await pool.execute(sql);
             return result.affectedRows > 0;
